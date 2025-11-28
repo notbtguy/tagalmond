@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAGALMOND | Game-Based Learning</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS for the dark, starry effect */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0c1d; /* Very dark background */
+            color: #e5e7eb; /* Light gray text */
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Subtle animated background effect */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: twinkle 5s infinite ease-in-out;
+        }
+
+        /* Generate random star positions/sizes for aesthetic */
+        .star:nth-child(1) { top: 10%; left: 5%; width: 2px; height: 2px; animation-delay: 0.5s; }
+        .star:nth-child(2) { top: 50%; left: 80%; width: 1px; height: 1px; animation-delay: 1.2s; }
+        .star:nth-child(3) { top: 85%; left: 30%; width: 3px; height: 3px; animation-delay: 2.1s; }
+        .star:nth-child(4) { top: 20%; left: 95%; width: 1px; height: 1px; animation-delay: 3s; }
+        .star:nth-child(5) { top: 60%; left: 15%; width: 2px; height: 2px; animation-delay: 4s; }
+        .star:nth-child(6) { top: 40%; left: 45%; width: 1px; height: 1px; animation-delay: 0s; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 0.2; transform: scale(0.5); }
+        }
+
+        /* Glassmorphism effect for cards and elements */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.2); /* Dark, subtle background */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            background: rgba(40, 50, 70, 0.3);
+            border: 1px solid rgba(139, 92, 246, 0.4); /* Subtle purple hover border */
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+        }
+
+        /* Neon-like button hover effect */
+        .neon-button {
+            transition: all 0.3s ease;
+        }
+        .neon-button:hover {
+            box-shadow: 0 0 8px rgba(139, 92, 246, 0.7), 0 0 15px rgba(139, 92, 246, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Custom glow for the main heading */
+        .text-glow {
+            text-shadow: 0 0 10px rgba(192, 132, 252, 0.5); /* Soft purple glow */
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Subtle Star Background Effect -->
+    <div class="stars">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div>
+
+    <!-- Header/Navigation -->
+    <header class="relative z-10 p-4 md:p-6">
+        <nav class="max-w-7xl mx-auto flex justify-between items-center glass-card p-3 rounded-xl">
+            <div class="text-2xl font-bold text-white tracking-widest">
+                <span class="text-purple-400">TAG</span>ALMOND
+            </div>
+            <a href="#games" class="neon-button px-4 py-2 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 shadow-lg">
+                Start Learning
+            </a>
+        </nav>
+    </header>
+
+    <main class="relative z-10">
+        <!-- Hero Section -->
+        <section class="py-20 md:py-32 text-center max-w-4xl mx-auto px-4">
+            <p class="text-sm font-medium uppercase tracking-widest text-purple-400 mb-4 glass-card inline-block px-3 py-1 rounded-full">
+                Interactive Learning Ecosystem
+            </p>
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold leading-tight mb-6 text-white text-glow">
+                Master Concepts. <br class="sm:hidden">
+                <span class="text-purple-400 italic font-serif">Play</span> Your Way to Success.
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10">
+                Forget boring textbooks. Our immersive games turn CBSE 9th-12th and JEE/NEET preparation into a fun, challenging, and highly effective experience.
+            </p>
+            <a href="#games" class="neon-button inline-flex items-center space-x-2 px-8 py-3 bg-fuchsia-600 text-white rounded-xl text-lg font-bold shadow-2xl shadow-fuchsia-600/50 hover:bg-fuchsia-700">
+                Explore Games
+                <!-- Simple right arrow icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </a>
+        </section>
+
+        <!-- Audience Section -->
+        <section class="py-16 md:py-24 bg-slate-900/50">
+            <div class="max-w-7xl mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold mb-8 text-white">Who We Cater To</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Target 1: CBSE 9th & 10th -->
+                    <div class="glass-card p-6 rounded-xl transform hover:scale-[1.03]">
+                        <div class="text-5xl mb-4 text-cyan-400">📚</div>
+                        <h3 class="text-xl font-semibold mb-2">CBSE 9th & 10th</h3>
+                        <p class="text-gray-400">Build strong foundations in Science and Maths through engaging, concept-driven gameplay.</p>
+                    </div>
+
+                    <!-- Target 2: CBSE 11th & 12th -->
+                    <div class="glass-card p-6 rounded-xl transform hover:scale-[1.03]">
+                        <div class="text-5xl mb-4 text-yellow-400">🔬</div>
+                        <h3 class="text-xl font-semibold mb-2">CBSE 11th & 12th</h3>
+                        <p class="text-gray-400">Deep dive into complex Physics, Chemistry, and Biology topics with practical application questions.</p>
+                    </div>
+
+                    <!-- Target 3: JEE/NEET Aspirants -->
+                    <div class="glass-card p-6 rounded-xl transform hover:scale-[1.03]">
+                        <div class="text-5xl mb-4 text-red-400">🚀</div>
+                        <h3 class="text-xl font-semibold mb-2">JEE / NEET Aspirants</h3>
+                        <p class="text-gray-400">Practice high-level MCQs in a fun environment, boosting speed and accuracy for entrance exams.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Game Showcase Section -->
+        <section id="games" class="py-20 md:py-32 max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-16 text-white">
+                Our <span class="text-purple-400">Interactive</span> Games
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Game 1 Card: Study Surfer -->
+                <div class="glass-card p-8 rounded-2xl flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-8">
+                    <div class="flex-shrink-0 w-full md:w-1/3 bg-purple-900/40 rounded-lg p-6 flex items-center justify-center">
+                        <span class="text-7xl">🏄</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h3 class="text-3xl font-bold mb-3 text-white">Study Surfer</h3>
+                        <p class="text-gray-300 mb-6">
+                            Surf the waves of knowledge! Rapid-fire questions test your core subject knowledge and help you retain key concepts quickly.
+                        </p>
+                        <ul class="list-disc list-inside text-gray-400 space-y-1 mb-8 text-sm">
+                            <li>Focus: Quick Recall & Core Concepts</li>
+                            <li>Target: All Subjects (9th - 12th)</li>
+                        </ul>
+                        <a href="https://study-surfer.vercel.app/" target="_blank" rel="noopener noreferrer" class="neon-button inline-block px-6 py-2 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 w-full text-center md:w-auto">
+                            Play Study Surfer
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Game 2 Card: Study Bird -->
+                <div class="glass-card p-8 rounded-2xl flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-8">
+                    <div class="flex-shrink-0 w-full md:w-1/3 bg-teal-900/40 rounded-lg p-6 flex items-center justify-center">
+                        <span class="text-7xl">🐦</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h3 class="text-3xl font-bold mb-3 text-white">Study Bird</h3>
+                        <p class="text-gray-300 mb-6">
+                            Fly high with competitive practice! This game focuses on high-difficulty questions perfect for JEE and NEET preparation.
+                        </p>
+                        <ul class="list-disc list-inside text-gray-400 space-y-1 mb-8 text-sm">
+                            <li>Focus: High-Level MCQs & Exam Speed</li>
+                            <li>Target: JEE/NEET & Advanced 11th/12th</li>
+                        </ul>
+                        <a href="https://study-bird.vercel.app/" target="_blank" rel="noopener noreferrer" class="neon-button inline-block px-6 py-2 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 w-full text-center md:w-auto">
+                            Play Study Bird
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 py-10 mt-20 bg-gray-900/70 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <div class="text-gray-400 mb-6 md:mb-0">
+                &copy; <span id="year"></span> TAGALMOND. All rights reserved.
+            </div>
+            
+            <!-- Contact Links -->
+            <div class="flex flex-wrap justify-center space-x-6">
+                <!-- Email -->
+                <a href="mailto:iamsanidhya.720@gmail.com" class="text-gray-300 hover:text-purple-400 transition duration-300 flex items-center mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-18 8V6a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z" /></svg>
+                    Email
+                </a>
+                
+                <!-- Instagram -->
+                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-purple-400 transition duration-300 flex items-center mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M7.5 10c0 1.381-1.119 2.5-2.5 2.5S2.5 11.381 2.5 10 3.619 7.5 5 7.5 7.5 8.619 7.5 10zm11 0c0 1.381-1.119 2.5-2.5 2.5s-2.5-1.119-2.5-2.5 1.119-2.5 2.5-2.5 2.5 1.119 2.5 2.5zm1.5 0c0-4.142-3.358-7.5-7.5-7.5S2 5.858 2 10s3.358 7.5 7.5 7.5c2.348 0 4.469-1.077 5.922-2.75l.078.078V18a1 1 0 002 0v-4.5c0-.55-.45-1-1-1z" /></svg>
+                    Instagram
+                </a>
+                
+                <!-- LinkedIn -->
+                <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-purple-400 transition duration-300 flex items-center mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM4 9h4v12H4zM6 7a2 2 0 100-4 2 2 0 000 4z" /></svg>
+                    LinkedIn
+                </a>
+
+                <!-- GitHub -->
+                <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-purple-400 transition duration-300 flex items-center mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.085-.744.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.304.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.237-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.003.404 2.292-1.552 3.301-1.23 3.301-1.23.652 1.652.241 2.873.118 3.176.77.84 1.236 1.911 1.236 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.562 21.82 24 17.323 24 12c0-6.627-5.373-12-12-12z" /></svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript to set the current year in the footer -->
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
