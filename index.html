@@ -1,247 +1,1117 @@
+```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TAGALMOND | Game-Based Learning</title>
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Custom CSS for the dark, starry effect */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0d0c1d; /* Very dark background */
-            color: #e5e7eb; /* Light gray text */
-            overflow-x: hidden;
-            position: relative;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MedResearchMate | Elite Clinical Research Mentorship for Trainees & Clinicians</title>
+  <meta name="description" content="Structured 1:1 research mentorship for medical students, interns, and early-career clinicians. Move from clinical idea to PubMed-indexed publications and international conference presentations.">
 
-        /* Subtle animated background effect */
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 0;
-        }
+  <!-- Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
-        .star {
-            position: absolute;
-            background: #ffffff;
-            border-radius: 50%;
-            opacity: 0.8;
-            animation: twinkle 5s infinite ease-in-out;
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#04070c',
+            surface: {
+              card: '#0a101d',
+              glass: 'rgba(15, 23, 42, 0.72)',
+              border: 'rgba(255, 255, 255, 0.08)'
+            },
+            mrm: {
+              teal: '#00D2B4',
+              blue: '#0284C7',
+              navy: '#034873',
+              accent: '#38BDF8',
+              leaf: '#16a34a',
+              wa: '#25D366'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+            serifLogo: ['"Times New Roman"', 'Georgia', 'serif'],
+          },
+          animation: {
+            'flow-float': 'flowFloat 4s ease-in-out infinite',
+            'radar-pulse': 'radarWave 2.4s infinite',
+            'ambient-glow': 'ambientPulse 8s ease-in-out infinite',
+          },
+          keyframes: {
+            flowFloat: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-12px)' },
+            },
+            radarWave: {
+              '0%': { transform: 'scale(0.95)', boxShadow: '0 0 0 0 rgba(37, 211, 102, 0.7)' },
+              '70%': { transform: 'scale(1)', boxShadow: '0 0 0 16px rgba(37, 211, 102, 0)' },
+              '100%': { transform: 'scale(0.95)', boxShadow: '0 0 0 0 rgba(37, 211, 102, 0)' },
+            },
+            ambientPulse: {
+              '0%, 100%': { opacity: '0.35', transform: 'scale(1)' },
+              '50%': { opacity: '0.6', transform: 'scale(1.08)' },
+            }
+          }
         }
+      }
+    }
+  </script>
 
-        /* Generate random star positions/sizes for aesthetic */
-        .star:nth-child(1) { top: 10%; left: 5%; width: 2px; height: 2px; animation-delay: 0.5s; }
-        .star:nth-child(2) { top: 50%; left: 80%; width: 1px; height: 1px; animation-delay: 1.2s; }
-        .star:nth-child(3) { top: 85%; left: 30%; width: 3px; height: 3px; animation-delay: 2.1s; }
-        .star:nth-child(4) { top: 20%; left: 95%; width: 1px; height: 1px; animation-delay: 3s; }
-        .star:nth-child(5) { top: 60%; left: 15%; width: 2px; height: 2px; animation-delay: 4s; }
-        .star:nth-child(6) { top: 40%; left: 45%; width: 1px; height: 1px; animation-delay: 0s; }
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.8; transform: scale(1); }
-            50% { opacity: 0.2; transform: scale(0.5); }
-        }
+  <style>
+    /* Premium Obsidian Glass Aesthetics */
+    html, body {
+      background-color: #04070c;
+      color: #f1f5f9;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        /* Glassmorphism effect for cards and elements */
-        .glass-card {
-            background: rgba(30, 41, 59, 0.2); /* Dark, subtle background */
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        .glass-card:hover {
-            background: rgba(40, 50, 70, 0.3);
-            border: 1px solid rgba(139, 92, 246, 0.4); /* Subtle purple hover border */
-            box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
-        }
+    .apple-glass {
+      background: rgba(10, 16, 29, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
-        /* Neon-like button hover effect */
-        .neon-button {
-            transition: all 0.3s ease;
-        }
-        .neon-button:hover {
-            box-shadow: 0 0 8px rgba(139, 92, 246, 0.7), 0 0 15px rgba(139, 92, 246, 0.3);
-            transform: translateY(-2px);
-        }
+    .apple-glass-card {
+      background: linear-gradient(180deg, rgba(16, 24, 40, 0.7) 0%, rgba(9, 14, 26, 0.9) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-        /* Custom glow for the main heading */
-        .text-glow {
-            text-shadow: 0 0 10px rgba(192, 132, 252, 0.5); /* Soft purple glow */
-        }
-    </style>
+    .apple-glass-card:hover {
+      border-color: rgba(56, 189, 248, 0.35);
+      box-shadow: 0 20px 45px -12px rgba(2, 132, 199, 0.22);
+      transform: translateY(-4px);
+    }
+
+    /* Ambient background gradient meshes */
+    .ambient-glow-1 {
+      position: absolute;
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(2, 132, 199, 0.16) 0%, rgba(0, 210, 180, 0.07) 45%, transparent 70%);
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient-glow-2 {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.09) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Range slider custom styling */
+    input[type=range] {
+      -webkit-appearance: none;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #00D2B4;
+      cursor: pointer;
+      box-shadow: 0 0 14px rgba(0, 210, 180, 0.7);
+      border: 2px solid #ffffff;
+      transition: transform 0.15s ease;
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    .modal-active {
+      display: flex !important;
+    }
+  </style>
 </head>
-<body class="min-h-screen">
 
-    <!-- Subtle Star Background Effect -->
-    <div class="stars">
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-    </div>
+<body class="selection:bg-mrm-teal selection:text-black min-h-screen flex flex-col justify-between">
 
-    <!-- Header/Navigation -->
-    <header class="relative z-10 p-4 md:p-6">
-        <nav class="max-w-7xl mx-auto flex justify-between items-center glass-card p-3 rounded-xl">
-            <div class="text-2xl font-bold text-white tracking-widest">
-                <span class="text-purple-400">TAG</span>ALMOND
-            </div>
-            <a href="#games" class="neon-button px-4 py-2 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 shadow-lg">
-                Start Learning
-            </a>
-        </nav>
-    </header>
+  <!-- Ambient Light Lighting -->
+  <div class="ambient-glow-1 animate-ambient-glow"></div>
+  <div class="ambient-glow-2 top-[35%] right-[-100px]"></div>
+  <div class="ambient-glow-2 top-[70%] left-[-150px]"></div>
 
-    <main class="relative z-10">
-        <!-- Hero Section -->
-        <section class="py-20 md:py-32 text-center max-w-4xl mx-auto px-4">
-            <p class="text-sm font-medium uppercase tracking-widest text-purple-400 mb-4 glass-card inline-block px-3 py-1 rounded-full">
-                Interactive Learning Ecosystem
-            </p>
-            <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold leading-tight mb-6 text-white text-glow">
-                Master Concepts. <br class="sm:hidden">
-                <span class="text-purple-400 italic font-serif">Play</span> Your Way to Success.
-            </h1>
-            <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10">
-                Forget boring textbooks. Our immersive games turn CBSE 9th-12th and JEE/NEET preparation into a fun, challenging, and highly effective experience.
-            </p>
-            <a href="#games" class="neon-button inline-flex items-center space-x-2 px-8 py-3 bg-fuchsia-600 text-white rounded-xl text-lg font-bold shadow-2xl shadow-fuchsia-600/50 hover:bg-fuchsia-700">
-                Explore Games
-                <!-- Simple right arrow icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-            </a>
-        </section>
+  <!-- ================= CONTINUOUSLY FLOWING FLOATING WHATSAPP BUTTON ================= -->
+  <!-- Flows gently across screen while scrolling with active radar wave -->
+  <div class="fixed bottom-6 right-5 sm:right-7 z-50 animate-flow-float">
+    <a href="https://wa.me/918278642105?text=Hello%20Aditi%20and%20the%20MedResearchMate%20team!%20I%20am%20interested%20in%20applying%20for%20an%20SRMA%20research%20cohort." 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       aria-label="Direct WhatsApp Connection with MedResearchMate Mentorship"
+       class="group flex items-center gap-3.5 pl-3 pr-5 py-2.5 rounded-full bg-[#0a1120]/95 backdrop-blur-2xl border border-emerald-500/40 hover:border-emerald-400 text-white shadow-[0_14px_40px_rgba(0,0,0,0.7)] hover:shadow-[0_14px_35px_rgba(37,211,102,0.45)] transition-all duration-300">
+      
+      <!-- Pulsing WhatsApp Circular Radar Orb -->
+      <div class="relative flex items-center justify-center w-11 h-11 rounded-full bg-[#25D366] text-white animate-radar-pulse flex-shrink-0">
+        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.199.534 1.286.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.353.101.173.45 1.049 1.487 1.706.324.205.597.27.77.356.174.087.275.073.376-.044.101-.116.433-.506.549-.679.116-.174.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.044.073.044.419-.1 1.002z"/>
+        </svg>
+      </div>
 
-        <!-- Audience Section -->
-        <section class="py-16 md:py-24 bg-slate-900/50">
-            <div class="max-w-7xl mx-auto px-4 text-center">
-                <h2 class="text-3xl font-bold mb-8 text-white">Who We Cater To</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Target 1: CBSE 9th & 10th -->
-                    <div class="glass-card p-6 rounded-xl transform hover:scale-[1.03]">
-                        <div class="text-5xl mb-4 text-cyan-400">📚</div>
-                        <h3 class="text-xl font-semibold mb-2">CBSE 9th & 10th</h3>
-                        <p class="text-gray-400">Build strong foundations in Science and Maths through engaging, concept-driven gameplay.</p>
-                    </div>
-
-                    <!-- Target 2: CBSE 11th & 12th -->
-                    <div class="glass-card p-6 rounded-xl transform hover:scale-[1.03]">
-                        <div class="text-5xl mb-4 text-yellow-400">🔬</div>
-                        <h3 class="text-xl font-semibold mb-2">CBSE 11th & 12th</h3>
-                        <p class="text-gray-400">Deep dive into complex Physics, Chemistry, and Biology topics with practical application questions.</p>
-                    </div>
-
-                    <!-- Target 3: JEE/NEET Aspirants -->
-                    <div class="glass-card p-6 rounded-xl transform hover:scale-[1.03]">
-                        <div class="text-5xl mb-4 text-red-400">🚀</div>
-                        <h3 class="text-xl font-semibold mb-2">JEE / NEET Aspirants</h3>
-                        <p class="text-gray-400">Practice high-level MCQs in a fun environment, boosting speed and accuracy for entrance exams.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- Game Showcase Section -->
-        <section id="games" class="py-20 md:py-32 max-w-7xl mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-16 text-white">
-                Our <span class="text-purple-400">Interactive</span> Games
-            </h2>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <!-- Game 1 Card: Study Surfer -->
-                <div class="glass-card p-8 rounded-2xl flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-8">
-                    <div class="flex-shrink-0 w-full md:w-1/3 bg-purple-900/40 rounded-lg p-6 flex items-center justify-center">
-                        <span class="text-7xl">🏄</span>
-                    </div>
-                    <div class="flex-grow">
-                        <h3 class="text-3xl font-bold mb-3 text-white">Study Surfer</h3>
-                        <p class="text-gray-300 mb-6">
-                            Surf the waves of knowledge! Rapid-fire questions test your core subject knowledge and help you retain key concepts quickly.
-                        </p>
-                        <ul class="list-disc list-inside text-gray-400 space-y-1 mb-8 text-sm">
-                            <li>Focus: Quick Recall & Core Concepts</li>
-                            <li>Target: All Subjects (9th - 12th)</li>
-                        </ul>
-                        <a href="https://study-surfer.vercel.app/" target="_blank" rel="noopener noreferrer" class="neon-button inline-block px-6 py-2 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 w-full text-center md:w-auto">
-                            Play Study Surfer
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Game 2 Card: Study Bird -->
-                <div class="glass-card p-8 rounded-2xl flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-8">
-                    <div class="flex-shrink-0 w-full md:w-1/3 bg-teal-900/40 rounded-lg p-6 flex items-center justify-center">
-                        <span class="text-7xl">🐦</span>
-                    </div>
-                    <div class="flex-grow">
-                        <h3 class="text-3xl font-bold mb-3 text-white">Study Bird</h3>
-                        <p class="text-gray-300 mb-6">
-                            Fly high with competitive practice! This game focuses on high-difficulty questions perfect for JEE and NEET preparation.
-                        </p>
-                        <ul class="list-disc list-inside text-gray-400 space-y-1 mb-8 text-sm">
-                            <li>Focus: High-Level MCQs & Exam Speed</li>
-                            <li>Target: JEE/NEET & Advanced 11th/12th</li>
-                        </ul>
-                        <a href="https://study-bird.vercel.app/" target="_blank" rel="noopener noreferrer" class="neon-button inline-block px-6 py-2 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 w-full text-center md:w-auto">
-                            Play Study Bird
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="relative z-10 py-10 mt-20 bg-gray-900/70 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
-            <div class="text-gray-400 mb-6 md:mb-0">
-                &copy; <span id="year"></span> TAGALMOND. All rights reserved.
-            </div>
-            
-            <!-- Contact Links -->
-            <div class="flex flex-wrap justify-center space-x-6">
-                <!-- Email -->
-                <a href="mailto:iamsanidhya.720@gmail.com" class="text-gray-300 hover:text-purple-400 transition duration-300 flex items-center mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-18 8V6a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z" /></svg>
-                    Email
-                </a>
-                
-                <!-- Instagram -->
-                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-purple-400 transition duration-300 flex items-center mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M7.5 10c0 1.381-1.119 2.5-2.5 2.5S2.5 11.381 2.5 10 3.619 7.5 5 7.5 7.5 8.619 7.5 10zm11 0c0 1.381-1.119 2.5-2.5 2.5s-2.5-1.119-2.5-2.5 1.119-2.5 2.5-2.5 2.5 1.119 2.5 2.5zm1.5 0c0-4.142-3.358-7.5-7.5-7.5S2 5.858 2 10s3.358 7.5 7.5 7.5c2.348 0 4.469-1.077 5.922-2.75l.078.078V18a1 1 0 002 0v-4.5c0-.55-.45-1-1-1z" /></svg>
-                    Instagram
-                </a>
-                
-                <!-- LinkedIn -->
-                <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-purple-400 transition duration-300 flex items-center mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM4 9h4v12H4zM6 7a2 2 0 100-4 2 2 0 000 4z" /></svg>
-                    LinkedIn
-                </a>
-
-                <!-- GitHub -->
-                <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-purple-400 transition duration-300 flex items-center mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.085-.744.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.304.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.237-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.003.404 2.292-1.552 3.301-1.23 3.301-1.23.652 1.652.241 2.873.118 3.176.77.84 1.236 1.911 1.236 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.562 21.82 24 17.323 24 12c0-6.627-5.373-12-12-12z" /></svg>
-                    GitHub
-                </a>
-            </div>
+      <!-- Live Flowing Status Indicator -->
+      <div class="flex flex-col text-left">
+        <div class="flex items-center gap-1.5">
+          <span class="inline-block w-2 h-2 rounded-full bg-[#25D366] animate-ping"></span>
+          <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Mentors Active</span>
         </div>
-    </footer>
+        <span class="text-xs sm:text-sm font-semibold text-slate-100 group-hover:text-emerald-300 transition-colors">Chat on WhatsApp</span>
+      </div>
+      
+      <i data-lucide="chevron-right" class="w-4 h-4 text-emerald-400 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+    </a>
+  </div>
 
-    <!-- JavaScript to set the current year in the footer -->
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
+  <!-- ================= TOP NAVIGATION ================= -->
+  <header class="fixed top-0 left-0 right-0 z-40 apple-glass border-b border-white/5 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Exact Circular MedResearchMate Emblem (Without Screenshot Background) -->
+      <a href="javascript:scrollToSection('top')" class="flex items-center gap-3.5 group focus:outline-none">
+        
+        <!-- Scalable Pure Circular Badge SVG -->
+        <div class="w-12 h-12 relative flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
+          <svg viewBox="0 0 300 300" class="w-full h-full drop-shadow-[0_0_12px_rgba(2,132,199,0.4)]" xmlns="http://www.w3.org/2000/svg">
+            <!-- Clean White Circular Disc Base -->
+            <circle cx="150" cy="150" r="144" fill="#FFFFFF" stroke="#0284c7" stroke-width="4"/>
+            
+            <!-- Blue Stethoscope Headset Arch & Binaural Tubing -->
+            <path d="M 108 52 C 108 36, 188 36, 188 52 L 188 80 C 188 108, 126 112, 138 128 C 146 138, 166 128, 178 116 L 194 102" fill="none" stroke="#0072b2" stroke-width="6.5" stroke-linecap="round"/>
+            <!-- Stethoscope Chestpiece / Acoustic Bell -->
+            <circle cx="194" cy="102" r="10" fill="#0072b2" stroke="#FFFFFF" stroke-width="2.5"/>
+            <circle cx="194" cy="102" r="5" fill="#FFFFFF"/>
+            <!-- Earpieces -->
+            <circle cx="108" cy="52" r="4.5" fill="#0072b2"/>
+            <circle cx="188" cy="52" r="4.5" fill="#0072b2"/>
+
+            <!-- Circular Dynamic Border Arc (Left Blue, Right Green) -->
+            <path d="M 88 58 A 120 120 0 0 0 52 142" fill="none" stroke="#0072b2" stroke-width="7" stroke-linecap="round"/>
+            <path d="M 216 68 A 120 120 0 0 1 242 165" fill="none" stroke="#16a34a" stroke-width="7" stroke-linecap="round"/>
+
+            <!-- Left Stylized Bold 'M' (Medical Blue) -->
+            <path d="M 66 142 L 66 94 L 88 122 L 106 94 L 106 142" fill="none" stroke="#0284c7" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+            
+            <!-- Right Stylized Bold 'M' (Clinical Green) -->
+            <path d="M 194 142 L 194 94 L 214 122 L 234 94 L 234 142" fill="none" stroke="#16a34a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+
+            <!-- Central 'R' Monogram Merged with DNA Double Helix -->
+            <!-- Upper Bowl of 'R' (Green) -->
+            <path d="M 132 135 L 132 94 L 160 94 C 174 94 174 116 160 116 L 132 116 M 152 116 L 168 140" fill="none" stroke="#16a34a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+            
+            <!-- Intertwining DNA Double Helix (Descending from Center) -->
+            <!-- Strand 1 (Blue) -->
+            <path d="M 144 135 C 130 145, 130 155, 144 165 C 158 175, 158 185, 144 195" fill="none" stroke="#0284c7" stroke-width="4.5" stroke-linecap="round"/>
+            <!-- Strand 2 (Green) -->
+            <path d="M 154 135 C 168 145, 168 155, 154 165 C 140 175, 140 185, 154 195" fill="none" stroke="#16a34a" stroke-width="4.5" stroke-linecap="round"/>
+            <!-- DNA Base Pairs / Ladder Rungs -->
+            <line x1="139" y1="145" x2="159" y2="145" stroke="#0284c7" stroke-width="3" stroke-linecap="round"/>
+            <line x1="135" y1="155" x2="163" y2="155" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/>
+            <line x1="139" y1="165" x2="159" y2="165" stroke="#0284c7" stroke-width="3" stroke-linecap="round"/>
+            <line x1="135" y1="175" x2="163" y2="175" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/>
+            <line x1="139" y1="185" x2="159" y2="185" stroke="#0284c7" stroke-width="3" stroke-linecap="round"/>
+
+            <!-- Twin Sprouting Botanical Leaves (Bottom Left) -->
+            <path d="M 98 148 C 88 136 102 120 118 126 C 118 142 106 154 98 148 Z" fill="#16a34a"/>
+            <path d="M 112 160 C 102 150 112 138 124 142 C 124 156 114 164 112 160 Z" fill="#22c55e"/>
+
+            <!-- Typography: MED RESEARCH MATE -->
+            <text x="150" y="230" text-anchor="middle" font-family="'Times New Roman', Georgia, serif" font-weight="bold" font-size="21" fill="#034873" letter-spacing="1.2">MED RESEARCH</text>
+            <text x="150" y="254" text-anchor="middle" font-family="'Times New Roman', Georgia, serif" font-weight="bold" font-size="24" fill="#034873" letter-spacing="2">MATE</text>
+            <text x="150" y="274" text-anchor="middle" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-weight="800" font-size="8.5" fill="#15803d" letter-spacing="2.2">DISCOVER • INNOVATE • IMPACT</text>
+          </svg>
+        </div>
+
+        <div class="flex flex-col text-left">
+          <span class="font-display font-extrabold tracking-tight text-white text-base sm:text-lg leading-none">MedResearchMate</span>
+          <span class="text-[10px] text-mrm-teal tracking-widest uppercase font-semibold mt-1">Discover • Innovate • Impact</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Items with Iframe-Safe Navigation -->
+      <nav class="hidden md:flex items-center gap-7 text-xs font-semibold uppercase tracking-wider text-slate-300">
+        <a href="javascript:scrollToSection('cohorts')" class="hover:text-white transition-colors">Specialty Tracks</a>
+        <a href="javascript:scrollToSection('curriculum')" class="hover:text-white transition-colors">4-Pillar Roadmap</a>
+        <a href="javascript:scrollToSection('calculator')" class="hover:text-white transition-colors">Match ROI Tool</a>
+        <a href="javascript:scrollToSection('testimonials')" class="hover:text-white transition-colors">Scholars</a>
+        <a href="javascript:scrollToSection('founder')" class="hover:text-white transition-colors">Leadership</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="flex items-center gap-3">
+        <button onclick="openApplyModal('General Research Fellowship')" class="relative group overflow-hidden px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider text-black bg-gradient-to-r from-mrm-teal via-mrm-accent to-emerald-400 shadow-[0_0_24px_rgba(0,210,180,0.4)] hover:shadow-[0_0_32px_rgba(0,210,180,0.7)] transition-all">
+          <span class="relative z-10 flex items-center gap-1.5">Apply for Track <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION ================= -->
+  <main id="top" class="flex-grow">
+    <section class="relative pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        
+        <!-- Urgent Cohort Alert Badge -->
+        <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-sky-400/30 bg-sky-950/40 backdrop-blur-md mb-8">
+          <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+          <span class="text-xs font-medium text-sky-200">
+            October 2026 Cohorts Live • Strictly 5–8 Scholars Per Track
+          </span>
+        </div>
+
+        <!-- Main Headline -->
+        <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08] mb-6">
+          Your First PubMed Paper. <br class="hidden sm:inline" />
+          <span class="bg-gradient-to-r from-sky-400 via-teal-300 to-emerald-400 bg-clip-text text-transparent">
+            Guided Step-by-Step.
+          </span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="max-w-3xl mx-auto text-base sm:text-lg text-slate-300 font-normal leading-relaxed mb-10">
+          Move from passive lectures to active high-impact publishing. Join an elite 1:1 mentored clinical research cohort—from clinical question to PROSPERO registration, meta-analysis in R, and international conference acceptance.
+        </p>
+
+        <!-- CTA Action Group -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto mb-14">
+          <button onclick="openApplyModal('Priority Candidate')" class="w-full sm:w-auto flex-1 px-8 py-4 rounded-2xl font-bold text-xs uppercase tracking-wider text-black bg-gradient-to-r from-mrm-teal to-mrm-accent hover:opacity-95 shadow-[0_10px_35px_rgba(0,210,180,0.35)] transition-all flex items-center justify-center gap-2">
+            Claim Your Seat <i data-lucide="sparkles" class="w-4 h-4"></i>
+          </button>
+          <a href="javascript:scrollToSection('cohorts')" class="w-full sm:w-auto flex-1 px-8 py-4 rounded-2xl font-semibold text-xs uppercase tracking-wider text-slate-200 border border-white/10 hover:border-white/30 bg-white/[0.03] hover:bg-white/[0.08] transition-all flex items-center justify-center gap-2">
+            Explore Tracks <i data-lucide="arrow-down" class="w-4 h-4"></i>
+          </a>
+        </div>
+
+        <!-- Live Countdown Timer Strip -->
+        <div class="inline-flex flex-col sm:flex-row items-center gap-4 px-6 py-3.5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
+          <span class="text-xs uppercase tracking-wider font-semibold text-slate-400">Applications Close in:</span>
+          <div class="flex items-center gap-3 font-mono text-base font-bold text-sky-400" id="cohort-timer">
+            <div><span id="days">02</span><span class="text-[10px] text-slate-500 font-sans ml-1">D</span></div>:
+            <div><span id="hours">14</span><span class="text-[10px] text-slate-500 font-sans ml-1">H</span></div>:
+            <div><span id="minutes">32</span><span class="text-[10px] text-slate-500 font-sans ml-1">M</span></div>:
+            <div><span id="seconds">45</span><span class="text-[10px] text-slate-500 font-sans ml-1">S</span></div>
+          </div>
+          <span class="text-xs text-rose-400 font-medium bg-rose-500/10 px-2.5 py-1 rounded-md border border-rose-500/20">Final Spots Remaining</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= METRICS / PROOF STRIP ================= -->
+    <section class="border-y border-white/5 bg-slate-950/60 py-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          
+          <div class="flex flex-col items-center">
+            <span class="font-display text-3xl sm:text-4xl font-extrabold text-white tracking-tight">58+</span>
+            <span class="text-xs uppercase tracking-widest text-slate-400 font-medium mt-1">Medical Scholars Mentored</span>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <span class="font-display text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-teal-300 tracking-tight">100%</span>
+            <span class="text-xs uppercase tracking-widest text-slate-400 font-medium mt-1">ICMJE Co-Authorship</span>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <span class="font-display text-3xl sm:text-4xl font-extrabold text-white tracking-tight">5 to 8</span>
+            <span class="text-xs uppercase tracking-widest text-slate-400 font-medium mt-1">Strict Cap Per Cohort</span>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <span class="font-display text-3xl sm:text-4xl font-extrabold text-emerald-400 tracking-tight">AACE & DDW</span>
+            <span class="text-xs uppercase tracking-widest text-slate-400 font-medium mt-1">2027 Target Forums</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ACTIVE COHORTS & TRACKS ================= -->
+    <section id="cohorts" class="py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div>
+            <span class="text-xs font-bold text-mrm-teal uppercase tracking-widest">Active Specialized Cohorts</span>
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-2">
+              Select Your Clinical Specialty
+            </h2>
+            <p class="text-slate-400 max-w-xl text-sm sm:text-base mt-2">
+              Each fellowship track investigates timely clinical controversies with high statistical power, targeting Tier-1 international conferences.
+            </p>
+          </div>
+          <div class="inline-flex items-center gap-2 text-xs text-slate-400 bg-white/[0.03] border border-white/10 px-4 py-2 rounded-xl">
+            <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
+            Guaranteed ICMJE Criteria Authorship
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Track 1: Endocrinology -->
+          <div class="apple-glass-card rounded-3xl p-6 flex flex-col justify-between relative group border-t-2 border-t-sky-500">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="text-[11px] font-bold text-sky-400 uppercase tracking-wider bg-sky-500/10 px-2.5 py-1 rounded-md border border-sky-500/20">Endocrinology</span>
+                <span class="text-[11px] font-semibold text-rose-400 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse"></span> 2 Seats Left
+                </span>
+              </div>
+
+              <h3 class="font-display text-xl font-bold text-white mb-2">Dual/Triple Incretin Agonists</h3>
+              <p class="text-xs text-slate-400 leading-relaxed mb-5">
+                GLP-1/GIP & non-statin lipid-lowering RCT pooling, Forest & Funnel plot generation in R, Cochrane RoB 2 certainty profiling.
+              </p>
+
+              <!-- Conference Banner -->
+              <div class="bg-black/40 border border-white/10 rounded-2xl p-4 mb-5">
+                <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Target Scientific Forum</div>
+                <div class="text-base font-extrabold text-white mt-0.5">AACE 2027</div>
+                <div class="text-[11px] text-slate-400">American Assoc. of Clinical Endocrinology</div>
+                <div class="text-[10px] text-slate-500 mt-1 flex items-center gap-1">
+                  <i data-lucide="map-pin" class="w-3 h-3"></i> San Diego, California • May 2027
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-white/5 mt-auto">
+              <div class="flex items-center justify-between text-xs text-slate-400 mb-3 font-mono">
+                <span>Application Window:</span>
+                <span class="text-white font-semibold">22 – 29 Oct</span>
+              </div>
+              <button onclick="selectCohortTrack('Endocrinology (AACE 2027)')" class="w-full py-3 px-4 rounded-xl font-bold text-xs uppercase tracking-wider text-black bg-gradient-to-r from-sky-400 to-teal-300 hover:opacity-90 transition-all flex items-center justify-center gap-2">
+                Apply for Track <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Track 2: Gastroenterology -->
+          <div class="apple-glass-card rounded-3xl p-6 flex flex-col justify-between relative group border-t-2 border-t-teal-500">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="text-[11px] font-bold text-teal-400 uppercase tracking-wider bg-teal-500/10 px-2.5 py-1 rounded-md border border-teal-500/20">Gastroenterology</span>
+                <span class="text-[11px] font-semibold text-rose-400 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse"></span> 3 Seats Left
+                </span>
+              </div>
+
+              <h3 class="font-display text-xl font-bold text-white mb-2">Refractory IBD Biologics</h3>
+              <p class="text-xs text-slate-400 leading-relaxed mb-5">
+                IL-23i, JAKi, MASLD/MASH advanced therapies & mucosal healing. PROSPERO registration, multi-database auditing.
+              </p>
+
+              <!-- Conference Banner -->
+              <div class="bg-black/40 border border-white/10 rounded-2xl p-4 mb-5">
+                <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Target Scientific Forum</div>
+                <div class="text-base font-extrabold text-white mt-0.5">DDW 2027</div>
+                <div class="text-[11px] text-slate-400">Digestive Disease Week (AASLD, AGA, ASGE)</div>
+                <div class="text-[10px] text-slate-500 mt-1 flex items-center gap-1">
+                  <i data-lucide="map-pin" class="w-3 h-3"></i> Washington, D.C. • May 2027
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-white/5 mt-auto">
+              <div class="flex items-center justify-between text-xs text-slate-400 mb-3 font-mono">
+                <span>Application Window:</span>
+                <span class="text-white font-semibold">22 – 29 Oct</span>
+              </div>
+              <button onclick="selectCohortTrack('Gastroenterology (DDW 2027)')" class="w-full py-3 px-4 rounded-xl font-bold text-xs uppercase tracking-wider text-black bg-gradient-to-r from-teal-400 to-emerald-300 hover:opacity-90 transition-all flex items-center justify-center gap-2">
+                Apply for Track <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Track 3: Neurology -->
+          <div class="apple-glass-card rounded-3xl p-6 flex flex-col justify-between relative group border-t-2 border-t-indigo-500">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="text-[11px] font-bold text-indigo-400 uppercase tracking-wider bg-indigo-500/10 px-2.5 py-1 rounded-md border border-indigo-500/20">Neurology</span>
+                <span class="text-[11px] font-semibold text-rose-400 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse"></span> 1 Spot Left
+                </span>
+              </div>
+
+              <h3 class="font-display text-xl font-bold text-white mb-2">Neuro-immunology & DMTs</h3>
+              <p class="text-xs text-slate-400 leading-relaxed mb-5">
+                CGRP antagonists & monoclonal antibodies for neuro-inflammation and MS. Subgroup & sensitivity modeling in R.
+              </p>
+
+              <!-- Conference Banner -->
+              <div class="bg-black/40 border border-white/10 rounded-2xl p-4 mb-5">
+                <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Target Scientific Forum</div>
+                <div class="text-base font-extrabold text-white mt-0.5">AAN 2027</div>
+                <div class="text-[11px] text-slate-400">American Academy of Neurology 79th Meeting</div>
+                <div class="text-[10px] text-slate-500 mt-1 flex items-center gap-1">
+                  <i data-lucide="map-pin" class="w-3 h-3"></i> Washington, D.C. • April 2027
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-white/5 mt-auto">
+              <div class="flex items-center justify-between text-xs text-slate-400 mb-3 font-mono">
+                <span>Application Window:</span>
+                <span class="text-white font-semibold">22 – 29 Oct</span>
+              </div>
+              <button onclick="selectCohortTrack('Neurology (AAN 2027)')" class="w-full py-3 px-4 rounded-xl font-bold text-xs uppercase tracking-wider text-black bg-gradient-to-r from-indigo-300 to-sky-300 hover:opacity-90 transition-all flex items-center justify-center gap-2">
+                Apply for Track <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Track 4: Cardiology (Housefull Status) -->
+          <div class="apple-glass-card rounded-3xl p-6 flex flex-col justify-between relative group border-t-2 border-t-slate-700 opacity-90">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider bg-slate-800 px-2.5 py-1 rounded-md">Cardiology</span>
+                <span class="text-[11px] font-bold text-amber-400 uppercase tracking-wider bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/30">Housefull</span>
+              </div>
+
+              <h3 class="font-display text-xl font-bold text-slate-200 mb-2">Interventional Cardiology</h3>
+              <p class="text-xs text-slate-400 leading-relaxed mb-5">
+                TAVR vs SAVR structural outcomes in intermediate surgical risk cohorts. Systematic pooling & PRISMA manuscript drafting.
+              </p>
+
+              <!-- Conference Banner -->
+              <div class="bg-black/40 border border-white/5 rounded-2xl p-4 mb-5">
+                <div class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Target Scientific Forum</div>
+                <div class="text-base font-extrabold text-slate-300 mt-0.5">ACC 2027</div>
+                <div class="text-[11px] text-slate-500">American College of Cardiology</div>
+                <div class="text-[10px] text-slate-600 mt-1 flex items-center gap-1">
+                  <i data-lucide="check-circle" class="w-3 h-3 text-emerald-500"></i> All 8 Seats Filled
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-white/5 mt-auto">
+              <div class="flex items-center justify-between text-xs text-slate-400 mb-3 font-mono">
+                <span>Next Cycle:</span>
+                <span class="text-amber-300 font-semibold">Waitlist Only</span>
+              </div>
+              <button onclick="selectCohortTrack('Cardiology (ACC 2027 - Waitlist)')" class="w-full py-3 px-4 rounded-xl font-bold text-xs uppercase tracking-wider text-slate-300 bg-white/5 hover:bg-white/10 transition-all flex items-center justify-center gap-2 border border-white/10">
+                Join Waitlist <i data-lucide="bell" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= THE 4-PILLAR ROADMAP ================= -->
+    <section id="curriculum" class="py-24 border-t border-white/5 bg-slate-950/40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-bold text-mrm-teal uppercase tracking-widest">The MRM Method</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-2">
+            The Systematic Review & Meta-Analysis Framework
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base mt-3">
+            No endless theoretical lectures. You build and execute an authentic clinical paper side-by-side with senior research fellows.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          
+          <div class="apple-glass-card rounded-2xl p-6 relative">
+            <span class="font-display text-3xl font-black text-sky-400/30">01</span>
+            <h3 class="font-display text-lg font-bold text-white mt-2 mb-2">Protocol & Question</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Formulate PICO questions, conduct gap analyses, audit existing Cochrane reviews, and register with PROSPERO for academic priority.
+            </p>
+          </div>
+
+          <div class="apple-glass-card rounded-2xl p-6 relative">
+            <span class="font-display text-3xl font-black text-teal-400/30">02</span>
+            <h3 class="font-display text-lg font-bold text-white mt-2 mb-2">Multi-Database Audit</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Mesh keyword search strings across PubMed, Embase, Scopus, Cochrane Central, and perform dual-blind Rayyan screening.
+            </p>
+          </div>
+
+          <div class="apple-glass-card rounded-2xl p-6 relative">
+            <span class="font-display text-3xl font-black text-emerald-400/30">03</span>
+            <h3 class="font-display text-lg font-bold text-white mt-2 mb-2">Synthesis in R Studio</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Forest & Funnel plot generation, random-effects model, I² heterogeneity testing, Cochrane RoB 2, and GRADE certainty.
+            </p>
+          </div>
+
+          <div class="apple-glass-card rounded-2xl p-6 relative">
+            <span class="font-display text-3xl font-black text-indigo-400/30">04</span>
+            <h3 class="font-display text-lg font-bold text-white mt-2 mb-2">Manuscript & Submission</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              PRISMA 2020 drafting, journal targeting, cover letter structuring, and handling peer-reviewer revisions.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= INTERACTIVE RESIDENCY CV / MATCH CALCULATOR ================= -->
+    <section id="calculator" class="py-24 relative overflow-hidden">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="apple-glass-card rounded-3xl p-8 sm:p-12 border border-sky-500/20 shadow-2xl relative">
+          <div class="max-w-2xl">
+            <span class="text-xs font-bold text-sky-400 uppercase tracking-widest">Residency & Fellowship Match Impact</span>
+            <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-1 mb-3">
+              Calculate Your Academic Portfolio Value
+            </h2>
+            <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-8">
+              According to NRMP and international clinical ranking criteria, peer-reviewed meta-analyses are the single highest weighted factor in distinguishing top match candidates.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div class="lg:col-span-7 space-y-6">
+              <div>
+                <div class="flex justify-between text-xs font-medium text-slate-300 mb-2">
+                  <span>Current PubMed Indexed Publications:</span>
+                  <span id="current-pubs-val" class="text-sky-400 font-bold font-mono text-sm">0 Papers</span>
+                </div>
+                <input type="range" id="current-pubs" min="0" max="6" value="0" class="w-full" oninput="updateCalculator()">
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-medium text-slate-300 mb-2">
+                  <span>Target Specialty Competitiveness:</span>
+                  <span id="specialty-label" class="text-teal-400 font-bold text-sm">Super-Competitive</span>
+                </div>
+                <select id="specialty-tier" class="w-full bg-slate-900/80 border border-white/10 rounded-xl px-4 py-3 text-xs text-slate-200 outline-none focus:border-sky-400" onchange="updateCalculator()">
+                  <option value="high">Tier-1 Highly Competitive (Internal Medicine, Gastro, Cardio, Neuro)</option>
+                  <option value="mid">Tier-2 Competitive (Pediatrics, Anesthesiology, Pathology)</option>
+                  <option value="ultra">Ultra-Specialized Surgical / Super-Specialty Fellowships</option>
+                </select>
+              </div>
+
+              <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs text-slate-400">
+                <i data-lucide="info" class="w-4 h-4 text-sky-400 inline-block mr-1"></i>
+                Completing 1 systematic review with MRM guarantees ICMJE-compliant authorship and an abstract prepared for international conference submission.
+              </div>
+            </div>
+
+            <!-- Output Scorecard -->
+            <div class="lg:col-span-5 bg-gradient-to-b from-sky-950/40 to-slate-950/80 border border-sky-500/30 rounded-2xl p-6 text-center">
+              <span class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">Estimated Match Advantage</span>
+              <div id="match-percentile" class="font-display text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-teal-300 my-2">
+                +84%
+              </div>
+              <p class="text-xs text-slate-300 mb-4">Interview invitation boost over average applicant pool</p>
+              
+              <button onclick="openApplyModal('From CV Calculator')" class="w-full py-3 rounded-xl font-bold text-xs uppercase tracking-wider text-black bg-gradient-to-r from-mrm-teal to-mrm-accent hover:opacity-90 transition-all">
+                Strengthen Your Portfolio
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SCHOLAR TESTIMONIALS ================= -->
+    <section id="testimonials" class="py-24 border-t border-white/5 bg-slate-950/30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="text-xs font-bold text-mrm-teal uppercase tracking-widest">Scholar Perspectives</span>
+          <h2 class="font-display text-3xl font-extrabold text-white tracking-tight mt-1">
+            Real Doctors. Real Papers.
+          </h2>
+          <p class="text-slate-400 text-sm mt-2">
+            Hear from medical scholars who transitioned from zero experience to published scientific authors.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Testimonial 1 -->
+          <div class="apple-glass-card rounded-2xl p-6 flex flex-col justify-between">
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed italic mb-6">
+              "What stood out to me most was how thoroughly we covered every aspect of conducting a systematic review and meta-analysis. The one-to-one classes and 24/7 support made the learning personalised and easy to follow. I’ve learned so much and feel confident in the entire research process!"
+            </p>
+            <div class="flex items-center gap-3 border-t border-white/5 pt-4">
+              <div class="w-9 h-9 rounded-full bg-sky-500/20 border border-sky-400/30 flex items-center justify-center font-bold text-sky-300 text-xs">
+                IS
+              </div>
+              <div>
+                <div class="text-sm font-bold text-white">Ishita Singh</div>
+                <div class="text-[11px] text-slate-400">Medical Scholar & Research Fellow</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="apple-glass-card rounded-2xl p-6 flex flex-col justify-between">
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed italic mb-6">
+              "Attending the SRMA cohort was an extremely enriching experience. I understood the practical research process clearly. Complex concepts like critical appraisal, literature searching, and data extraction were explained with clinical examples, giving me immense confidence!"
+            </p>
+            <div class="flex items-center gap-3 border-t border-white/5 pt-4">
+              <div class="w-9 h-9 rounded-full bg-teal-500/20 border border-teal-400/30 flex items-center justify-center font-bold text-teal-300 text-xs">
+                DS
+              </div>
+              <div>
+                <div class="text-sm font-bold text-white">Divyanshi</div>
+                <div class="text-[11px] text-slate-400">SMS Medical College, Jaipur</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="apple-glass-card rounded-2xl p-6 flex flex-col justify-between">
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed italic mb-6">
+              "MedResearchMate teaches the entire research process through live and recorded classes. No need to figure everything out yourself—you get ready-made research topics to work on. It guides you step-by-step until publication and international conference presentations!"
+            </p>
+            <div class="flex items-center gap-3 border-t border-white/5 pt-4">
+              <div class="w-9 h-9 rounded-full bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center font-bold text-indigo-300 text-xs">
+                AR
+              </div>
+              <div>
+                <div class="text-sm font-bold text-white">Aryaman</div>
+                <div class="text-[11px] text-slate-400">Medical Scholar & Early-Career Clinician</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= FOUNDER SEGMENT (POSITIONED AT LAST, NO PROFILE PHOTOS, CLEAN BOX BUTTONS) ================= -->
+    <section id="founder" class="py-24 border-t border-white/5 relative">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="apple-glass-card rounded-3xl p-8 sm:p-12 border border-white/10 relative overflow-hidden">
+          
+          <!-- Subtle Glow Accent -->
+          <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div class="flex flex-col gap-6">
+            
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-white/[0.04] border border-white/10 w-fit">
+              <span class="w-2 h-2 rounded-full bg-mrm-teal"></span>
+              <span class="text-[11px] font-bold tracking-widest uppercase text-slate-300">Foundation & Academic Direction</span>
+            </div>
+
+            <div>
+              <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                Led by Aditi Goyal
+              </h2>
+              <p class="text-sm font-semibold text-mrm-teal mt-1">
+                Founder & Head of Research Mentorship • MedResearchMate
+              </p>
+            </div>
+
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-3xl font-normal">
+              MedResearchMate was created to dismantle the arbitrary gatekeeping in academic medicine. Founded with the conviction that rigorous evidence synthesis should be practical, accessible, and actionable, Aditi Goyal leads clinical scholars from early ideation through protocol drafting, meta-analysis in R, and international conference submissions.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-2">
+              <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+                <span class="font-display text-xl font-bold text-white">58+</span>
+                <p class="text-xs text-slate-400 mt-1">Clinicians & scholars personally mentored</p>
+              </div>
+              <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+                <span class="font-display text-xl font-bold text-white">100%</span>
+                <p class="text-xs text-slate-400 mt-1">Legitimate, non-predatory publication focus</p>
+              </div>
+              <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+                <span class="font-display text-xl font-bold text-white">1-on-1</span>
+                <p class="text-xs text-slate-400 mt-1">Personalized guidance across all stages</p>
+              </div>
+            </div>
+
+            <!-- Elevated Box Action Buttons (Strictly Clean Layout, No Photos) -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4 border-t border-white/5">
+              
+              <!-- Primary Box Button: Official LinkedIn Profile -->
+              <a href="https://www.linkedin.com/in/aditi-goyal-651197249?utm_source=share_via&utm_content=profile&utm_medium=member_android" 
+                 target="_blank" 
+                 rel="noopener noreferrer"
+                 class="group px-6 py-4 rounded-2xl bg-[#0a66c2]/15 hover:bg-[#0a66c2]/25 border border-[#0a66c2]/40 hover:border-[#0a66c2] text-white transition-all flex items-center justify-between sm:justify-start gap-4 shadow-lg">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-[#0a66c2] text-white flex items-center justify-center flex-shrink-0">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                  </div>
+                  <div class="text-left">
+                    <div class="text-xs text-slate-400 font-medium">LinkedIn Profile</div>
+                    <div class="text-sm font-bold text-white group-hover:text-sky-300 transition-colors">Connect with Aditi Goyal</div>
+                  </div>
+                </div>
+                <i data-lucide="arrow-up-right" class="w-4 h-4 text-sky-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+              </a>
+
+              <!-- Secondary Box Button: Direct WhatsApp Advisory -->
+              <a href="https://wa.me/918278642105?text=Hello%20Aditi,%20I%20would%20like%20to%20discuss%20mentorship%20opportunities%20with%20MedResearchMate."
+                 target="_blank"
+                 rel="noopener noreferrer" 
+                 class="px-6 py-4 rounded-2xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 hover:border-white/20 text-white transition-all flex items-center justify-between sm:justify-start gap-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="message-square" class="w-4 h-4"></i>
+                  </div>
+                  <div class="text-left">
+                    <div class="text-xs text-slate-400 font-medium">Direct Mentorship Inquiries</div>
+                    <div class="text-sm font-bold text-slate-200">Speak with Founder on WhatsApp</div>
+                  </div>
+                </div>
+                <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= FREQUENTLY ASKED QUESTIONS ================= -->
+    <section class="py-20 border-t border-white/5 bg-slate-950/40">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-14">
+          <span class="text-xs font-bold text-mrm-teal uppercase tracking-widest">Common Inquiries</span>
+          <h2 class="font-display text-3xl font-extrabold text-white tracking-tight mt-1">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="space-y-4">
+          
+          <div class="apple-glass rounded-2xl p-5 cursor-pointer" onclick="toggleFaq(this)">
+            <div class="flex justify-between items-center">
+              <h3 class="text-sm sm:text-base font-semibold text-white">Can I balance this cohort with my hectic medical duties?</h3>
+              <i data-lucide="plus" class="w-4 h-4 text-slate-400 transition-transform faq-icon"></i>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-400 mt-3 hidden faq-answer leading-relaxed">
+              Yes. MedResearchMate was structured specifically for MBBS students, interns, and residents. All live masterclasses are recorded, and tasks are partitioned into weekly deliverables with direct 24/7 doubt resolution over WhatsApp and mentorship channels.
+            </p>
+          </div>
+
+          <div class="apple-glass rounded-2xl p-5 cursor-pointer" onclick="toggleFaq(this)">
+            <div class="flex justify-between items-center">
+              <h3 class="text-sm sm:text-base font-semibold text-white">How does authorship attribution work?</h3>
+              <i data-lucide="plus" class="w-4 h-4 text-slate-400 transition-transform faq-icon"></i>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-400 mt-3 hidden faq-answer leading-relaxed">
+              Authorship follows strict ICMJE (International Committee of Medical Journal Editors) guidelines. Every scholar makes substantial contributions to conception, literature screening, statistical extraction, and manuscript review, guaranteeing legitimate co-authorship.
+            </p>
+          </div>
+
+          <div class="apple-glass rounded-2xl p-5 cursor-pointer" onclick="toggleFaq(this)">
+            <div class="flex justify-between items-center">
+              <h3 class="text-sm sm:text-base font-semibold text-white">Do I need prior coding or statistical experience in R?</h3>
+              <i data-lucide="plus" class="w-4 h-4 text-slate-400 transition-transform faq-icon"></i>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-400 mt-3 hidden faq-answer leading-relaxed">
+              Not at all. We teach you from foundational data entry to running packages like `meta` and `metafor` in R with step-by-step templates and code scripts.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= FINAL HIGH-CONVERSION CTA ================= -->
+    <section class="py-24 relative overflow-hidden">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        
+        <!-- Center Emblem -->
+        <div class="w-20 h-20 mx-auto mb-6">
+          <svg viewBox="0 0 300 300" class="w-full h-full drop-shadow-[0_0_24px_rgba(0,210,180,0.5)]" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="150" cy="150" r="144" fill="#FFFFFF" stroke="#0284c7" stroke-width="4"/>
+            <path d="M 108 52 C 108 36, 188 36, 188 52 L 188 80 C 188 108, 126 112, 138 128 C 146 138, 166 128, 178 116 L 194 102" fill="none" stroke="#0072b2" stroke-width="6.5" stroke-linecap="round"/>
+            <circle cx="194" cy="102" r="10" fill="#0072b2" stroke="#FFFFFF" stroke-width="2.5"/>
+            <circle cx="194" cy="102" r="5" fill="#FFFFFF"/>
+            <path d="M 88 58 A 120 120 0 0 0 52 142" fill="none" stroke="#0072b2" stroke-width="7" stroke-linecap="round"/>
+            <path d="M 216 68 A 120 120 0 0 1 242 165" fill="none" stroke="#16a34a" stroke-width="7" stroke-linecap="round"/>
+            <path d="M 66 142 L 66 94 L 88 122 L 106 94 L 106 142" fill="none" stroke="#0284c7" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 194 142 L 194 94 L 214 122 L 234 94 L 234 142" fill="none" stroke="#16a34a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 132 135 L 132 94 L 160 94 C 174 94 174 116 160 116 L 132 116 M 152 116 L 168 140" fill="none" stroke="#16a34a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 144 135 C 130 145, 130 155, 144 165 C 158 175, 158 185, 144 195" fill="none" stroke="#0284c7" stroke-width="4.5"/>
+            <path d="M 154 135 C 168 145, 168 155, 154 165 C 140 175, 140 185, 154 195" fill="none" stroke="#16a34a" stroke-width="4.5"/>
+            <text x="150" y="230" text-anchor="middle" font-family="'Times New Roman', Georgia, serif" font-weight="bold" font-size="21" fill="#034873" letter-spacing="1.2">MED RESEARCH</text>
+            <text x="150" y="254" text-anchor="middle" font-family="'Times New Roman', Georgia, serif" font-weight="bold" font-size="24" fill="#034873" letter-spacing="2">MATE</text>
+            <text x="150" y="274" text-anchor="middle" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-weight="800" font-size="8.5" fill="#15803d" letter-spacing="2.2">DISCOVER • INNOVATE • IMPACT</text>
+          </svg>
+        </div>
+
+        <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+          One Question. One Project. <br />
+          One Guided Research Journey.
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base max-w-xl mx-auto mb-8 font-normal">
+          Stop wondering what to do next. Complete your first rigorous paper and build scientific independence with MedResearchMate.
+        </p>
+
+        <button onclick="openApplyModal('Final Call To Action')" class="px-9 py-4 rounded-2xl font-bold text-xs uppercase tracking-wider text-black bg-gradient-to-r from-mrm-teal via-mrm-accent to-emerald-400 hover:opacity-95 shadow-[0_12px_40px_rgba(0,210,180,0.4)] transition-all">
+          Apply for October Cohorts Now
+        </button>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="border-t border-white/5 bg-slate-950/80 pt-16 pb-12 text-slate-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12 text-left">
+        
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="font-display font-bold text-white text-base">MedResearchMate</span>
+            <span class="text-[10px] text-mrm-teal uppercase font-semibold">Jaipur, India</span>
+          </div>
+          <p class="text-slate-400 text-xs leading-relaxed max-w-md">
+            Dedicated research mentorship platform empowering medical students, interns, and clinicians across India and internationally to publish peer-reviewed scientific evidence.
+          </p>
+          <div class="mt-4 flex items-center gap-4 text-slate-300">
+            <a href="https://wa.me/918278642105" target="_blank" rel="noopener noreferrer" class="hover:text-mrm-teal flex items-center gap-1.5"><i data-lucide="phone" class="w-3.5 h-3.5"></i> +91 8278642105</a>
+            <span>•</span>
+            <a href="https://www.linkedin.com/in/aditi-goyal-651197249?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" class="hover:text-mrm-teal">Founder's LinkedIn</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-white font-semibold text-xs uppercase tracking-wider mb-3">Tracks & Venues</h4>
+          <ul class="space-y-2">
+            <li>Endocrinology (AACE 2027)</li>
+            <li>Gastroenterology (DDW 2027)</li>
+            <li>Neurology (AAN 2027)</li>
+            <li>Cardiology (ACC 2027)</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-semibold text-xs uppercase tracking-wider mb-3">Standards & Ethics</h4>
+          <ul class="space-y-2">
+            <li>ICMJE Authorship Guidelines</li>
+            <li>PRISMA 2020 Statement</li>
+            <li>Cochrane RoB 2 & GRADE</li>
+            <li>PROSPERO Protocol Audits</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Mandatory Footer Credit & Copyright -->
+      <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          © 2026 MedResearchMate. All rights reserved.
+        </div>
+        
+        <!-- MANDATED PRODUCTION CREDIT BADGE -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.04] border border-white/10 text-slate-200 font-semibold text-xs tracking-wide">
+          <span class="w-2 h-2 rounded-full bg-teal-400"></span>
+          <span>A Sanidhya Production</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ================= ADMISSIONS APPLICATION MODAL ================= -->
+  <div id="apply-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="apple-glass-card rounded-3xl p-6 sm:p-8 max-w-lg w-full border border-white/15 relative shadow-2xl text-left">
+      
+      <button onclick="closeApplyModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white p-1">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="mb-6">
+        <span class="text-xs font-bold text-mrm-teal uppercase tracking-widest">Priority Admission Dossier</span>
+        <h3 class="font-display text-2xl font-bold text-white mt-1">Join October 2026 Cohort</h3>
+        <p class="text-xs text-slate-400 mt-1">Directly routes your application to Aditi Goyal and the senior faculty.</p>
+      </div>
+
+      <form id="admission-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Full Legal Name (For Authorship Indexing)</label>
+          <input type="text" id="applicant-name" required placeholder="e.g. Dr. Aryan Sharma" class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-xs text-white outline-none focus:border-sky-400">
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">WhatsApp Contact Number</label>
+          <input type="tel" id="applicant-phone" required placeholder="e.g. +91 9876543210" class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-xs text-white outline-none focus:border-sky-400">
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Medical College / Hospital Affiliation</label>
+          <input type="text" id="applicant-college" required placeholder="e.g. SMS Medical College / AIIMS" class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-xs text-white outline-none focus:border-sky-400">
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Desired Specialty Fellowship Track</label>
+          <select id="applicant-track" class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-xs text-white outline-none focus:border-sky-400">
+            <option value="Endocrinology (AACE 2027)">Endocrinology — Target: AACE 2027 (San Diego)</option>
+            <option value="Gastroenterology (DDW 2027)">Gastroenterology — Target: DDW 2027 (Washington, D.C.)</option>
+            <option value="Neurology (AAN 2027)">Neurology — Target: AAN 2027 (Washington, D.C.)</option>
+            <option value="Cardiology (Waitlist)">Cardiology — ACC 2027 (Waitlist Only)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="w-full py-4 rounded-xl font-bold text-xs uppercase tracking-wider text-black bg-gradient-to-r from-mrm-teal via-mrm-accent to-emerald-400 hover:opacity-95 transition-all shadow-lg mt-2">
+          Submit Application & Connect on WhatsApp
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Lucide Icon Init & Dynamic JavaScript Handlers -->
+  <script>
+    lucide.createIcons();
+
+    // Iframe-Safe Smooth Scroll Function (Works inside Google Sites Embeds)
+    function scrollToSection(sectionId) {
+      if (sectionId === 'top') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      const el = document.getElementById(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // Modal Handlers
+    function openApplyModal(trackName) {
+      if (trackName) {
+        const select = document.getElementById('applicant-track');
+        if (select) {
+          for (let i = 0; i < select.options.length; i++) {
+            if (select.options[i].value.toLowerCase().includes(trackName.split(' ')[0].toLowerCase())) {
+              select.selectedIndex = i;
+              break;
+            }
+          }
+        }
+      }
+      const modal = document.getElementById('apply-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('modal-active');
+    }
+
+    function closeApplyModal() {
+      const modal = document.getElementById('apply-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('modal-active');
+    }
+
+    function selectCohortTrack(trackName) {
+      openApplyModal(trackName);
+    }
+
+    // Direct WhatsApp Form Dispatch with Target Blank
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('applicant-name').value;
+      const phone = document.getElementById('applicant-phone').value;
+      const college = document.getElementById('applicant-college').value;
+      const track = document.getElementById('applicant-track').value;
+
+      const message = `Hello Aditi & MedResearchMate Admissions Team,%0A%0AI would like to apply for the Fellowship Program:%0A• Name: ${encodeURIComponent(name)}%0A• Contact: ${encodeURIComponent(phone)}%0A• Institution: ${encodeURIComponent(college)}%0A• Chosen Track: ${encodeURIComponent(track)}%0A%0APlease share the protocol syllabus and admission dossier.`;
+
+      // Safe dispatch for Google Sites sandboxed iframes
+      const waUrl = `https://wa.me/918278642105?text=${message}`;
+      const tempLink = document.createElement('a');
+      tempLink.href = waUrl;
+      tempLink.target = '_blank';
+      tempLink.rel = 'noopener noreferrer';
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      document.body.removeChild(tempLink);
+
+      closeApplyModal();
+    }
+
+    // FAQ Accordion Toggle
+    function toggleFaq(element) {
+      const answer = element.querySelector('.faq-answer');
+      const icon = element.querySelector('.faq-icon');
+      const isHidden = answer.classList.contains('hidden');
+
+      if (isHidden) {
+        answer.classList.remove('hidden');
+        icon.style.transform = 'rotate(45deg)';
+      } else {
+        answer.classList.add('hidden');
+        icon.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    // Interactive CV / Match Calculator
+    function updateCalculator() {
+      const pubs = parseInt(document.getElementById('current-pubs').value);
+      const tier = document.getElementById('specialty-tier').value;
+      
+      document.getElementById('current-pubs-val').innerText = pubs === 1 ? '1 Paper' : `${pubs} Papers`;
+
+      let baseScore = 60;
+      if (tier === 'high') baseScore = 75;
+      if (tier === 'ultra') baseScore = 85;
+
+      const boost = Math.min(98, baseScore + (pubs * 3) + 12);
+      document.getElementById('match-percentile').innerText = `+${boost}%`;
+    }
+
+    // October Cohort Countdown Timer
+    function startTimer() {
+      const deadline = new Date("2026-10-29T23:59:59").getTime();
+      setInterval(() => {
+        const now = new Date().getTime();
+        const diff = deadline - now;
+        if (diff > 0) {
+          const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+          const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+          document.getElementById('days').innerText = String(d).padStart(2, '0');
+          document.getElementById('hours').innerText = String(h).padStart(2, '0');
+          document.getElementById('minutes').innerText = String(m).padStart(2, '0');
+          document.getElementById('seconds').innerText = String(s).padStart(2, '0');
+        }
+      }, 1000);
+    }
+    startTimer();
+  </script>
 </body>
 </html>
+`
